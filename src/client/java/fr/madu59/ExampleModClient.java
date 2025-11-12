@@ -1,4 +1,4 @@
-package com.example;
+package fr.madu59;
 
 import net.fabricmc.api.ClientModInitializer;
 
