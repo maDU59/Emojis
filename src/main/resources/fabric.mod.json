@@ -14,6 +14,7 @@
 	"license": "MIT",
 	"icon": "assets/emojis/icon.png",
 	"environment": "*",
+	"accessWidener" : "emojis.aw",
 	"entrypoints": {
 		"main": [
 			"fr.madu59.ExampleMod"

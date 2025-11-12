@@ -3,7 +3,8 @@
 	"package": "fr.madu59.mixin.client",
 	"compatibilityLevel": "JAVA_21",
 	"client": [
-		"ExampleClientMixin"
+		"CommandSuggestionsMixin",
+		"SuggestionsListMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
