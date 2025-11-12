@@ -23,8 +23,7 @@ public class EmojiManager{
     public static final ArrayList<Emoji> emojiList = new ArrayList<Emoji>();
 
     public static void load(ResourceManager manager) {
-        try (InputStream is = Minecraft.getInstance().getResourceManager()
-                .getResource(new ResourceLocation("emojis", "emojis.json")).get().open()) {
+        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation("emojis", "emojis.json")).get().open()) {
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
                 EMOJIS.put(entry.getKey(), entry.getValue().getAsString());

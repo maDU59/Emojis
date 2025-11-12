@@ -33,14 +33,16 @@ public abstract class SuggestionsListMixin {
 
     @Inject(method = "useSuggestion", at = @At("TAIL"))
     private void useSuggestion(CallbackInfo ci) {
+
         EditBox editBox = this.field_21615.input;
         Suggestion suggestion = this.suggestionList.get(this.current);
+
         for (Emoji emoji : EmojiManager.emojiList) {
-            if (suggestion.getText() == emoji.suggestion) {
-                editBox.deleteChars(- emoji.suggestion.length());
+            if (suggestion.getText() == emoji.getSuggestion()) {
+                editBox.deleteChars(- emoji.getSuggestion().length());
                 editBox.setHighlightPos(editBox.getCursorPosition());
-                editBox.insertText(emoji.emoji);
-                break;
+                editBox.insertText(emoji.getEmoji());
+                return;
             }
         }
     }
