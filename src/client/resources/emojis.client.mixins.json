@@ -5,7 +5,8 @@
 	"client": [
 		"CommandSuggestionsMixin",
 		"SuggestionsListMixin",
-		"EditBoxMixin"
+		"EditBoxMixin",
+		"TextFieldHelperMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
