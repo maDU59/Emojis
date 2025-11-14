@@ -17,7 +17,6 @@ import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
 import fr.madu59.utils.EmojiManager;
-
 import net.minecraft.client.gui.components.CommandSuggestions;
 import net.minecraft.client.gui.components.EditBox;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -75,7 +74,7 @@ public abstract class CommandSuggestionsMixin {
 	}
 
 	private int getLastPattern(String string, Pattern pattern){
-		if (string.isEmpty() || string == null){
+		if (string == null || string.isEmpty()){
 			return -1;
 		}
 		Matcher matcher = pattern.matcher(string);

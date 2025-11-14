@@ -39,7 +39,7 @@ public abstract class SuggestionsListMixin {
 
         for (Emoji emoji : EmojiManager.emojiList) {
             if (suggestion.getText() == emoji.getSuggestion()) {
-                editBox.deleteChars(- emoji.getSuggestion().length());
+                editBox.deleteChars(- emoji.getSuggestion().length() + 1);
                 editBox.setHighlightPos(editBox.getCursorPosition());
                 editBox.insertText(emoji.getEmoji());
                 return;
