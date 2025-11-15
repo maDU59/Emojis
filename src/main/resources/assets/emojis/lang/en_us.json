@@ -3,5 +3,6 @@
     "emoji-removed-success":"Custom emoji deleted",
     "emoji-removed-fail":"Error while trying to delete custom emoji",
     "emoji-added-success":"Custom emoji added",
-    "emoji-added-fail":"Error while trying to add custom emoji"
+    "emoji-added-fail":"Error while trying to add custom emoji",
+    "display-custom-emoji-list":"Here is the list off all your custom emojis:"
 }
