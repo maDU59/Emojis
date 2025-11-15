@@ -8,6 +8,7 @@ public class EmojiReloadListener implements SimpleSynchronousResourceReloadListe
 
     @Override
     public void onResourceManagerReload(ResourceManager manager) {
+        CustomEmojiManager.load();
         EmojiManager.load(manager);
     }
 

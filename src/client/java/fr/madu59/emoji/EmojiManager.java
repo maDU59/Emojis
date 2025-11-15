@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -29,11 +30,13 @@ public class EmojiManager{
         try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation("emojis", "emojis.json")).get().open()) {
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
-                EMOJIS.put(entry.getKey(), entry.getValue().getAsString());
-                String suggestion = entry.getKey() + " " + entry.getValue().getAsString();
-                suggestions.add(suggestion);
-                emojiList.add(new Emoji(entry.getKey(), entry.getValue().getAsString(), suggestion));
+                addEmoji(entry.getKey(), entry.getValue().getAsString());
             }
+
+            for (Map.Entry<String, String> entry : CustomEmojiManager.customEmojiMap.entrySet()) {
+                addEmoji(entry.getKey(), entry.getValue());
+            }
+
             loaded = true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,5 +49,27 @@ public class EmojiManager{
 
     public static Set<String> getNames() {
         return EMOJIS.keySet();
+    }
+
+    public static void addEmoji(String id, String value){
+        EMOJIS.put(id, value);
+        String suggestion = id + " " + value;
+        suggestions.add(suggestion);
+        emojiList.add(new Emoji(id, value, suggestion));
+    }
+
+    public static boolean removeEmoji(String id){
+        Iterator<Emoji> it = emojiList.iterator();
+
+        while (it.hasNext()) {
+            Emoji emoji = it.next();
+            if (emoji.getId().equals(id)){
+                EMOJIS.remove(id);
+                suggestions.remove(emoji.getSuggestion());
+                emojiList.remove(emoji);
+                return true;
+            }
+        }
+        return false;
     }
 }

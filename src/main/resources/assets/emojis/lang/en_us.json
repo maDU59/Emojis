@@ -1,0 +1,7 @@
+{
+    "empty-custom-emoji-list":"You currently have no custom emojis. Type '/emoji add' to add one",
+    "emoji-removed-success":"Custom emoji deleted",
+    "emoji-removed-fail":"Error while trying to delete custom emoji",
+    "emoji-added-success":"Custom emoji added",
+    "emoji-added-fail":"Error while trying to add custom emoji"
+}
