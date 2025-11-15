@@ -8,8 +8,7 @@
 		"maDU59_"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/maDU59/Emojis"
 	},
 	"license": "MIT",
 	"icon": "assets/emojis/icon.png",
@@ -17,10 +16,10 @@
 	"accessWidener" : "emojis.aw",
 	"entrypoints": {
 		"main": [
-			"fr.madu59.ExampleMod"
+			"fr.madu59.EmojiMod"
 		],
 		"client": [
-			"fr.madu59.ExampleModClient"
+			"fr.madu59.EmojiModClient"
 		]
 	},
 	"mixins": [
