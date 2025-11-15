@@ -11,9 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import fr.madu59.utils.Emoji;
-import fr.madu59.utils.EmojiManager;
-
+import fr.madu59.emoji.Emoji;
+import fr.madu59.emoji.EmojiManager;
 import net.minecraft.client.gui.font.TextFieldHelper;
 
 @Mixin(TextFieldHelper.class)

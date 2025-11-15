@@ -1,4 +1,4 @@
-package fr.madu59.utils;
+package fr.madu59.emoji;
 
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
 import net.minecraft.resources.ResourceLocation;

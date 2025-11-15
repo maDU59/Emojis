@@ -11,9 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.brigadier.suggestion.Suggestion;
 
-import fr.madu59.utils.Emoji;
-import fr.madu59.utils.EmojiManager;
-
+import fr.madu59.emoji.Emoji;
+import fr.madu59.emoji.EmojiManager;
 import net.minecraft.client.gui.components.CommandSuggestions;
 import net.minecraft.client.gui.components.EditBox;
 

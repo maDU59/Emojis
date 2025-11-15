@@ -1,6 +1,6 @@
 package fr.madu59;
 
-import fr.madu59.utils.EmojiReloadListener;
+import fr.madu59.emoji.EmojiReloadListener;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.server.packs.PackType;
