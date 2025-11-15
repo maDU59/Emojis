@@ -27,7 +27,7 @@ public class EmojiManager{
         EMOJIS.clear();
         suggestions.clear();
         emojiList.clear();
-        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation("emojis", "emojis.json")).get().open()) {
+        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(ResourceLocation.tryParse("emojis:emojis.json")).get().open()) {
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
                 addEmoji(entry.getKey(), entry.getValue().getAsString());

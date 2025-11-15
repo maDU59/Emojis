@@ -14,6 +14,6 @@ public class EmojiReloadListener implements SimpleSynchronousResourceReloadListe
 
     @Override
     public ResourceLocation getFabricId() {
-        return new ResourceLocation("emojis");
+        return ResourceLocation.tryParse("emojis");
     }
 }
