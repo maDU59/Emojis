@@ -1,0 +1,8 @@
+{
+    "empty-custom-emoji-list":"Vous n'avez pas d'émojis personnalisés. Entrez '/emoji add' pour en ajouter",
+    "emoji-removed-success":"Emoji personnalisé supprimé",
+    "emoji-removed-fail":"Erreur pendant la suppression d'un emoji personnalisé",
+    "emoji-added-success":"Emoji personnalisé ajouté",
+    "emoji-added-fail":"Erreur pendant la création d'un emoji personnalisé",
+    "display-custom-emoji-list":"Voici la liste de tous vos emojis personnalisés:"
+}
