@@ -1,8 +1,15 @@
 {
 	"required": true,
 	"package": "fr.madu59.mixin",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_17",
 	"mixins": [
+	],
+	"client": [
+		"CommandSuggestionsMixin",
+		"SuggestionsListMixin",
+		"EditBoxMixin",
+		"TextFieldHelperMixin",
+		"CommandSuggestionsAccessor"
 	],
 	"injectors": {
 		"defaultRequire": 1

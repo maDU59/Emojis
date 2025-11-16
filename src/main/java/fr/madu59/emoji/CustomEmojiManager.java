@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.nio.file.*;
 import java.util.*;
 
-import net.fabricmc.loader.api.FabricLoader;
+import net.minecraftforge.fml.loading.FMLPaths;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +14,7 @@ import com.google.gson.reflect.TypeToken;
 public class CustomEmojiManager {
 
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final Path CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve("emojis-custom.json");
+    private static final Path CONFIG_PATH = FMLPaths.CONFIGDIR.get().resolve("emojis-custom.json");
     public static Map<String, String> customEmojiMap = new LinkedHashMap<String, String>();
 
     public static boolean saveData(Map<String, String> map) {

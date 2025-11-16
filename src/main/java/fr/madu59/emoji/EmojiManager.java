@@ -12,9 +12,9 @@ import java.util.Set;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import fr.madu59.EmojiMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.resources.ResourceManager;
 
 public class EmojiManager{
 
@@ -23,11 +23,13 @@ public class EmojiManager{
     public static final ArrayList<String> suggestions = new ArrayList<String>();
     public static final ArrayList<Emoji> emojiList = new ArrayList<Emoji>();
 
-    public static void load(ResourceManager manager) {
+    public static void load() {
+        EmojiMod.LOGGER.info("Trying to load emojis");
         EMOJIS.clear();
         suggestions.clear();
         emojiList.clear();
-        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(new ResourceLocation("emojis", "emojis.json")).get().open()) {
+        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(ResourceLocation.tryParse("emojis:emojis.json")).get().open()) {
+            EmojiMod.LOGGER.info("Emojis loaded");
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
                 addEmoji(entry.getKey(), entry.getValue().getAsString());

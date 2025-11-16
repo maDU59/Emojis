@@ -1,4 +1,4 @@
-package fr.madu59.mixin.client;
+package fr.madu59.mixin;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.regex.Matcher;

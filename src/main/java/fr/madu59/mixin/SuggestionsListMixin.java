@@ -1,6 +1,7 @@
-package fr.madu59.mixin.client;
+package fr.madu59.mixin;
 
 import java.util.List;
+import java.lang.reflect.Field;
 
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,14 +19,9 @@ import net.minecraft.client.gui.components.EditBox;
 
 @Mixin(CommandSuggestions.SuggestionsList.class)
 public abstract class SuggestionsListMixin {
-
-    @Shadow
-    @Final
-    CommandSuggestions field_21615;
-
     @Shadow
     private int current;
-
+    
     @Shadow
     @Final
     private List<Suggestion> suggestionList;
@@ -33,11 +29,20 @@ public abstract class SuggestionsListMixin {
     @Inject(method = "useSuggestion", at = @At("TAIL"))
     private void useSuggestion(CallbackInfo ci) {
 
-        EditBox editBox = this.field_21615.input;
+        CommandSuggestions outer;
+        try {
+            Field outerField = this.getClass().getDeclaredField("this$0");
+            outerField.setAccessible(true);
+            outer = (CommandSuggestions) outerField.get(this);
+        } catch (ReflectiveOperationException e) {
+            return;
+        }
+
+        EditBox editBox = ((CommandSuggestionsAccessor) outer).getInput();
         Suggestion suggestion = this.suggestionList.get(this.current);
 
         for (Emoji emoji : EmojiManager.emojiList) {
-            if (suggestion.getText() == emoji.getSuggestion()) {
+            if (suggestion.getText().equals(emoji.getSuggestion())) {
                 editBox.deleteChars(- (emoji.getId().length() + emoji.getEmoji().length() + 1));
                 editBox.setHighlightPos(editBox.getCursorPosition());
                 editBox.insertText(emoji.getEmoji());
