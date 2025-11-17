@@ -3,10 +3,10 @@ package fr.madu59;
 import com.mojang.logging.LogUtils;
 
 import fr.madu59.emoji.CustomEmojiManager;
-import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+
 import org.slf4j.Logger;
 
 @Mod(EmojiMod.MOD_ID)
@@ -19,11 +19,8 @@ public class EmojiMod{
 	public static final Logger LOGGER = LogUtils.getLogger();
 
 	public EmojiMod(FMLJavaModLoadingContext context) {
-        // Get the mod event bus
-        IEventBus modEventBus = context.getModEventBus();
-
-        // Register client setup only for client distribution
-        modEventBus.addListener(this::onClientSetup);
+        var modBusGroup = context.getModBusGroup();
+        FMLClientSetupEvent.getBus(modBusGroup).addListener(this::onClientSetup);
     }
 
     private void onClientSetup(final FMLClientSetupEvent event) {

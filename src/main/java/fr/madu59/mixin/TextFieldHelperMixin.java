@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import fr.madu59.emoji.Emoji;
 import fr.madu59.emoji.EmojiManager;
 import net.minecraft.client.gui.font.TextFieldHelper;
+import net.minecraft.client.input.CharacterEvent;
 
 @Mixin(TextFieldHelper.class)
 public abstract class TextFieldHelperMixin {
@@ -36,9 +37,9 @@ public abstract class TextFieldHelperMixin {
     public abstract void insertText(String string);
 
     @Inject(method = "charTyped", at = @At("RETURN"))
-    private void charTyped(char c, CallbackInfoReturnable<Boolean> ci) {
+    private void charTyped(CharacterEvent characterEvent, CallbackInfoReturnable<Boolean> ci) {
 
-        if(c != ':') return;
+        if(! characterEvent.codepointAsString().equals(":")) return;
 
         String value = (String)this.getMessageFn.get();
         int cursorPos = this.cursorPos;
@@ -48,7 +49,7 @@ public abstract class TextFieldHelperMixin {
         int lastSpace = getLastPattern(value, WHITESPACE_PATTERN);
 
         if (emojiStart >= lastSpace && emojiStart >= 0){
-            value = value.substring(emojiStart) + c;
+            value = value.substring(emojiStart) + ":";
 
             for (Emoji emoji : EmojiManager.emojiList) {
                 if (value.equals(emoji.getId())) {

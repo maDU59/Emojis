@@ -2,7 +2,7 @@ package fr.madu59;
 
 import fr.madu59.emoji.EmojiCommand;
 import net.minecraftforge.client.event.RegisterClientCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 
