@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.nio.file.*;
 import java.util.*;
 
-import net.minecraftforge.fml.loading.FMLPaths;
+import net.neoforged.fml.loading.FMLPaths;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
