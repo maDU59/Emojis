@@ -114,7 +114,13 @@ with open(font_json_path, "w", encoding="utf-8") as f:
 pack_meta = {
     "pack": {
         "pack_format": PACK_FORMAT,
-        "description": "Adds colored emojis to Minecraft! The emojis are from Twemojis and are licensed under CC BY 4.0"
+        "description": "Adds colored emojis to Minecraft! The emojis are from Twemojis and are licensed under CC BY 4.0",
+        "min_format":15,
+        "max_format":99,
+        "supported_formats": {
+            "min_inclusive": 15,
+            "max_inclusive": 99
+        }
     }
 }
 with open(os.path.join(OUTPUT_DIR, "pack.mcmeta"), "w", encoding="utf-8") as f:
