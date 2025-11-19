@@ -31,6 +31,8 @@ bin/
 # fabric
 
 run/
+runs/
+run-data/
 
 # java
 
