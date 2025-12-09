@@ -1,7 +1,7 @@
 package fr.madu59.emoji;
 
 import net.fabricmc.fabric.api.resource.SimpleSynchronousResourceReloadListener;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 public class EmojiReloadListener implements SimpleSynchronousResourceReloadListener {
@@ -13,7 +13,7 @@ public class EmojiReloadListener implements SimpleSynchronousResourceReloadListe
     }
 
     @Override
-    public ResourceLocation getFabricId() {
-        return ResourceLocation.tryParse("emojis");
+    public Identifier getFabricId() {
+        return Identifier.tryParse("emojis");
     }
 }

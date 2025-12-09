@@ -13,7 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
 
 public class EmojiManager{
@@ -27,7 +27,7 @@ public class EmojiManager{
         EMOJIS.clear();
         suggestions.clear();
         emojiList.clear();
-        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(ResourceLocation.tryParse("emojis:emojis.json")).get().open()) {
+        try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(Identifier.tryParse("emojis:emojis.json")).get().open()) {
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
                 addEmoji(entry.getKey(), entry.getValue().getAsString());
