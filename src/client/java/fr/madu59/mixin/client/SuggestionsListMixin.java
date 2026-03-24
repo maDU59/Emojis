@@ -21,7 +21,7 @@ public abstract class SuggestionsListMixin {
 
     @Shadow
     @Final
-    CommandSuggestions field_21615;
+    CommandSuggestions this$0;
 
     @Shadow
     private int current;
@@ -33,7 +33,7 @@ public abstract class SuggestionsListMixin {
     @Inject(method = "useSuggestion", at = @At("TAIL"))
     private void useSuggestion(CallbackInfo ci) {
 
-        EditBox editBox = this.field_21615.input;
+        EditBox editBox = this.this$0.input;
         Suggestion suggestion = this.suggestionList.get(this.current);
 
         for (Emoji emoji : EmojiManager.emojiList) {

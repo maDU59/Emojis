@@ -3,7 +3,7 @@ package fr.madu59.emoji;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 
-import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.*;
+import static net.fabricmc.fabric.api.client.command.v2.ClientCommands.*;
 
 import java.util.Map;
 
@@ -68,6 +68,6 @@ public class EmojiCommand {
     }
 
     public static void feedbackMessage(Component message){
-        Minecraft.getInstance().player.displayClientMessage(message, false);
+        Minecraft.getInstance().player.sendSystemMessage(message);
     }
 }

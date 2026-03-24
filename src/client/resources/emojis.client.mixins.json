@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"package": "fr.madu59.mixin.client",
-	"compatibilityLevel": "JAVA_21",
+	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"CommandSuggestionsMixin",
 		"SuggestionsListMixin",

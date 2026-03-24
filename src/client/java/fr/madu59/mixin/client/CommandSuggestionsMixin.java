@@ -36,7 +36,7 @@ public abstract class CommandSuggestionsMixin {
     boolean commandsOnly;
 
 	@Shadow
-	public abstract void showSuggestions(boolean bl);
+	public abstract void showSuggestions(final boolean bl);
 
 	@Shadow
     @Nullable
@@ -58,6 +58,8 @@ public abstract class CommandSuggestionsMixin {
 			String beforeCursorText = string.substring(0, cursorPos);
 			int emojiStart = getLastPattern(beforeCursorText, COLLON_PATTERN);
 			int lastSpace = getLastPattern(beforeCursorText, WHITESPACE_PATTERN);
+
+			System.out.println("ARGH");
 
 			if (emojiStart >= 0 && emojiStart >= lastSpace && emojiStart <= cursorPos && beforeCursorText.charAt(emojiStart) == ':'){
 
