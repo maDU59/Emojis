@@ -1,14 +1,12 @@
 package fr.madu59.mixin.client;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import fr.madu59.EmojiModClient;
 import fr.madu59.emoji.Emoji;
 import fr.madu59.emoji.EmojiManager;
 import net.minecraft.client.gui.components.EditBox;
@@ -16,9 +14,6 @@ import net.minecraft.client.input.CharacterEvent;
 
 @Mixin(EditBox.class)
 public abstract class EditBoxMixin {
-
-    private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s+)");
-	private static final Pattern COLLON_PATTERN = Pattern.compile("(:)");
 
     @Shadow
     public abstract String getValue();
@@ -39,18 +34,18 @@ public abstract class EditBoxMixin {
     private void useSuggestion(CharacterEvent charEvent, CallbackInfoReturnable<Boolean> ci) {
         if (ci.getReturnValue() && charEvent.codepointAsString().equals(":")){
 
-            String value = this.getValue();
+            String beforeCursorText = this.getValue();
             int cursorPos = this.getCursorPosition();
-            value = value.substring(0, cursorPos - 1);
+            beforeCursorText = beforeCursorText.substring(0, cursorPos - 1);
 
-            int emojiStart = getLastPattern(value, COLLON_PATTERN);
-			int lastSpace = getLastPattern(value, WHITESPACE_PATTERN);
+            int emojiStart = beforeCursorText.lastIndexOf(':');
+			int lastSpace = EmojiModClient.getLastSpace(beforeCursorText);
 
             if (emojiStart >= lastSpace && emojiStart >= 0){
-                value = value.substring(emojiStart) + ":";
+                beforeCursorText = beforeCursorText.substring(emojiStart) + ":";
 
                 for (Emoji emoji : EmojiManager.emojiList) {
-                    if (value.equals(emoji.getId())) {
+                    if (beforeCursorText.equals(emoji.getId())) {
                         this.deleteChars(- emoji.getId().length());
                         this.setHighlightPos(this.getCursorPosition());
                         this.insertText(emoji.getEmoji());
@@ -60,19 +55,4 @@ public abstract class EditBoxMixin {
             }
         }
     }
-
-    private int getLastPattern(String string, Pattern pattern){
-		if (string == null || string.isEmpty()){
-			return -1;
-		}
-		Matcher matcher = pattern.matcher(string);
-		int lastIndex = -1;
-
-		while (matcher.find())
-		{
-			lastIndex = matcher.start();
-		}
-		
-		return lastIndex;
-	}
 }

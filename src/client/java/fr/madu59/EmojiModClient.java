@@ -13,4 +13,13 @@ public class EmojiModClient implements ClientModInitializer {
 		ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new EmojiReloadListener());
 		EmojiCommand.register();
 	}
+
+	public static int getLastSpace(String string){
+		for (int i = string.length() - 1; i >= 0; i--) {
+			if (Character.isWhitespace(string.charAt(i))) {
+				return i;
+			}
+		}
+		return -1;
+	}
 }

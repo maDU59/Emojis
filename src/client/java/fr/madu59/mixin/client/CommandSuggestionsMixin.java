@@ -1,8 +1,6 @@
 package fr.madu59.mixin.client;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
@@ -16,6 +14,7 @@ import com.mojang.brigadier.StringReader;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
+import fr.madu59.EmojiModClient;
 import fr.madu59.emoji.EmojiManager;
 import net.minecraft.client.gui.components.CommandSuggestions;
 import net.minecraft.client.gui.components.EditBox;
@@ -23,9 +22,6 @@ import net.minecraft.commands.SharedSuggestionProvider;
 
 @Mixin(CommandSuggestions.class)
 public abstract class CommandSuggestionsMixin {
-
-	private static final Pattern WHITESPACE_PATTERN = Pattern.compile("(\\s+)");
-	private static final Pattern COLLON_PATTERN = Pattern.compile("(:)");
 
 	@Shadow
     @Final
@@ -42,24 +38,18 @@ public abstract class CommandSuggestionsMixin {
     @Nullable
     private CompletableFuture<Suggestions> pendingSuggestions;
 	
-	@Inject(at = @At("TAIL"), method = "updateCommandInfo", cancellable = true)
+	@Inject(at = @At("TAIL"), method = "updateCommandInfo")
 	private void updateCommandInfo(CallbackInfo ci) {
 
 		String string = this.input.getValue();
-		StringReader stringReader = new StringReader(string);
-		boolean isCommand = stringReader.canRead() && stringReader.peek() == '/';
-		if (isCommand) {
-			stringReader.skip();
-		}
+		boolean isCommand = string.length() > 0 && string.charAt(0) == '/';
 
 		if (!(this.commandsOnly || isCommand)) {
 			
 			int cursorPos = this.input.getCursorPosition();
 			String beforeCursorText = string.substring(0, cursorPos);
-			int emojiStart = getLastPattern(beforeCursorText, COLLON_PATTERN);
-			int lastSpace = getLastPattern(beforeCursorText, WHITESPACE_PATTERN);
-
-			System.out.println("ARGH");
+			int emojiStart = beforeCursorText.lastIndexOf(':');
+			int lastSpace = EmojiModClient.getLastSpace(beforeCursorText);
 
 			if (emojiStart >= 0 && emojiStart >= lastSpace && emojiStart <= cursorPos && beforeCursorText.charAt(emojiStart) == ':'){
 
@@ -70,23 +60,8 @@ public abstract class CommandSuggestionsMixin {
 					}
 					this.showSuggestions(false);
 				});
-				ci.cancel();
+				return;
 			}
 		}
-	}
-
-	private int getLastPattern(String string, Pattern pattern){
-		if (string == null || string.isEmpty()){
-			return -1;
-		}
-		Matcher matcher = pattern.matcher(string);
-		int lastIndex = -1;
-
-		while (matcher.find())
-		{
-			lastIndex = matcher.start();
-		}
-		
-		return lastIndex;
 	}
 }
