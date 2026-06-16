@@ -34,13 +34,12 @@ public abstract class SuggestionsListMixin {
         EditBox editBox = this.this$0.input;
         Suggestion suggestion = this.suggestionList.get(this.current);
 
-        for (Emoji emoji : EmojiManager.emojiList) {
-            if (suggestion.getText() == emoji.getSuggestion()) {
-                editBox.deleteChars(- emoji.getSuggestion().codePointCount(0,emoji.getSuggestion().length()));
-                editBox.setHighlightPos(editBox.getCursorPosition());
-                editBox.insertText(emoji.getEmoji());
-                return;
-            }
+        if(EmojiManager.suggestionMap.containsKey(suggestion.getText())){
+            Emoji emoji = EmojiManager.suggestionMap.get(suggestion.getText());
+            editBox.deleteChars(- emoji.getSuggestion().codePointCount(0,emoji.getSuggestion().length()));
+            editBox.setHighlightPos(editBox.getCursorPosition());
+            editBox.insertText(emoji.getEmoji());
+            return;
         }
     }
 }

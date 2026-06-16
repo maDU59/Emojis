@@ -18,13 +18,11 @@ import net.minecraft.resources.Identifier;
 public class EmojiManager{
 
     private static final Map<String, String> EMOJIS = new HashMap<>();
-    public static final ArrayList<String> suggestions = new ArrayList<String>();
-    public static final ArrayList<Emoji> emojiList = new ArrayList<Emoji>();
+    public static final Map<String, Emoji> suggestionMap = new HashMap<>();
+    public static final Map<String, Emoji> idMap = new HashMap<>();
 
     public static void load() {
         EMOJIS.clear();
-        suggestions.clear();
-        emojiList.clear();
         try (InputStream is = Minecraft.getInstance().getResourceManager().getResource(Identifier.tryParse("emojis:emojis.json")).get().open()) {
             JsonObject obj = JsonParser.parseReader(new InputStreamReader(is)).getAsJsonObject();
             for (var entry : obj.entrySet()) {
@@ -50,19 +48,20 @@ public class EmojiManager{
     public static void addEmoji(String id, String value){
         EMOJIS.put(id, value);
         String suggestion = id + " " + value;
-        suggestions.add(suggestion);
-        emojiList.add(new Emoji(id, value, suggestion));
+        Emoji emoji = new Emoji(id, value, suggestion);
+        suggestionMap.put(suggestion, emoji);
+        idMap.put(id, emoji);
     }
 
     public static boolean removeEmoji(String id){
-        Iterator<Emoji> it = emojiList.iterator();
+        Iterator<Emoji> it = idMap.values().iterator();
 
         while (it.hasNext()) {
             Emoji emoji = it.next();
             if (emoji.getId().equals(id)){
                 EMOJIS.remove(id);
-                suggestions.remove(emoji.getSuggestion());
-                emojiList.remove(emoji);
+                suggestionMap.remove(emoji.getSuggestion());
+                idMap.remove(id, emoji);
                 return true;
             }
         }

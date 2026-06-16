@@ -49,7 +49,7 @@ public abstract class CommandSuggestionsMixin {
 
 			if (emojiStart >= 0 && emojiStart >= lastSpace && emojiStart <= cursorPos && beforeCursorText.charAt(emojiStart) == ':'){
 
-				this.pendingSuggestions = SharedSuggestionProvider.suggest(EmojiManager.suggestions, new SuggestionsBuilder(beforeCursorText, emojiStart));
+				this.pendingSuggestions = SharedSuggestionProvider.suggest(EmojiManager.suggestionMap.keySet(), new SuggestionsBuilder(beforeCursorText, emojiStart));
 				this.pendingSuggestions.thenRun(() -> {
 					if (!this.pendingSuggestions.isDone()) {
 						return;

@@ -45,12 +45,11 @@ public abstract class TextFieldHelperMixin {
         if (emojiStart >= lastSpace && emojiStart >= 0){
             beforeCursorText = beforeCursorText.substring(emojiStart) + ":";
 
-            for (Emoji emoji : EmojiManager.emojiList) {
-                if (beforeCursorText.equals(emoji.getId())) {
-                    this.removeCharsFromCursor(- emoji.getId().length());
-                    this.insertText(emoji.getEmoji());
-                    return;
-                }
+            if(EmojiManager.idMap.containsKey(beforeCursorText)) {
+                Emoji emoji = EmojiManager.idMap.get(beforeCursorText);
+                this.removeCharsFromCursor(- emoji.getId().length());
+                this.insertText(emoji.getEmoji());
+                return;
             }
         }
     }
