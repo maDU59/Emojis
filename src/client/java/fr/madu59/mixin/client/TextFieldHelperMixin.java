@@ -33,7 +33,7 @@ public abstract class TextFieldHelperMixin {
     @Inject(method = "charTyped", at = @At("RETURN"))
     private void charTyped(CharacterEvent characterEvent, CallbackInfoReturnable<Boolean> ci) {
 
-        if(! characterEvent.codepointAsString().equals(":")) return;
+        if(!characterEvent.codepointAsString().equals(":")) return;
 
         String beforeCursorText = (String)this.getMessageFn.get();
         int cursorPos = this.cursorPos;

@@ -14,16 +14,14 @@ import com.google.gson.JsonParser;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
-import net.minecraft.server.packs.resources.ResourceManager;
 
 public class EmojiManager{
 
-    public static boolean loaded = false;
     private static final Map<String, String> EMOJIS = new HashMap<>();
     public static final ArrayList<String> suggestions = new ArrayList<String>();
     public static final ArrayList<Emoji> emojiList = new ArrayList<Emoji>();
 
-    public static void load(ResourceManager manager) {
+    public static void load() {
         EMOJIS.clear();
         suggestions.clear();
         emojiList.clear();
@@ -36,8 +34,6 @@ public class EmojiManager{
             for (Map.Entry<String, String> entry : CustomEmojiManager.customEmojiMap.entrySet()) {
                 addEmoji(entry.getKey(), entry.getValue());
             }
-
-            loaded = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
