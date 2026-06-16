@@ -24,11 +24,9 @@ import net.minecraft.commands.SharedSuggestionProvider;
 public abstract class CommandSuggestionsMixin {
 
 	@Shadow
-    @Final
     EditBox input;
 
 	@Shadow
-    @Final
     boolean commandsOnly;
 
 	@Shadow

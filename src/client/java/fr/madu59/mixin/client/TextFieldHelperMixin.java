@@ -19,11 +19,9 @@ import net.minecraft.client.input.CharacterEvent;
 public abstract class TextFieldHelperMixin {
 
     @Shadow
-    @Final
     Supplier<String> getMessageFn;
 
     @Shadow
-    @Final
     private int cursorPos;
 
     @Shadow

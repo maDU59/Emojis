@@ -20,14 +20,12 @@ import net.minecraft.client.gui.components.EditBox;
 public abstract class SuggestionsListMixin {
 
     @Shadow
-    @Final
     CommandSuggestions this$0;
 
     @Shadow
     private int current;
 
     @Shadow
-    @Final
     private List<Suggestion> suggestionList;
 
     @Inject(method = "useSuggestion", at = @At("TAIL"))
